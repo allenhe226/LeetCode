@@ -3,11 +3,10 @@ class Solution:
         n = len(temperatures)
         output = [0] * n
         stack = []
-        for i in range(n-1,-1,-1):
-            while stack and temperatures[i] >= temperatures[stack[-1]]:
-                stack.pop()
-            if stack:
-                output[i] = stack[-1] - i
+        for i in range(n):
+            while stack and temperatures[i] > temperatures[stack[-1]]:
+                x = stack.pop()
+                output[x] = i - x
             stack.append(i)
         return output
         
