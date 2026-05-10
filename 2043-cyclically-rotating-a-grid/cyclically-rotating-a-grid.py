@@ -1,19 +1,32 @@
 class Solution:
     def rotateGrid(self, grid: List[List[int]], k: int) -> List[List[int]]:
         m, n = len(grid), len(grid[0])
-        dirs = [(1,0),(0,1),(-1,0),(0,-1)]
-        for i in range(min(m//2,n//2)):
-            l = 2*(m-2*i+n-2*i)-4
-            for j in range(k%l):
-                corners = {(i,i),(m-1-i,i),(m-1-i,n-1-i),(i,n-1-i)}
-                x, y, d = i, i, 0
-                first = grid[y][x]
-                while d < 4:
-                    dx, dy = dirs[d]
-                    nx, ny = x+dx, y+dy
-                    grid[y][x] = grid[ny][nx]
-                    if (ny,nx) in corners:
-                        d += 1
-                    y, x = ny, nx
-                grid[y+1][x] = first
+        layers = min(m,n)//2
+        for layer in range(layers):
+            arr = []
+            for c in range(layer, n-layer):
+                arr.append(grid[layer][c])
+            for r in range(layer+1, m-layer-1):
+                arr.append(grid[r][n-layer-1])
+            for c in range(n-layer-1, layer-1,-1):
+                arr.append(grid[m-layer-1][c])
+            for r in range(m-layer-2, layer, -1):
+                arr.append(grid[r][layer])
+
+            shift = k % len(arr)
+            arr = arr[shift:] + arr[:shift]
+            idx = 0
+
+            for c in range(layer, n-layer):
+                grid[layer][c] = arr[idx]
+                idx += 1
+            for r in range(layer+1, m-layer-1):
+                grid[r][n-layer-1] = arr[idx]
+                idx += 1
+            for c in range(n-layer-1, layer-1,-1):
+                grid[m-layer-1][c] = arr[idx]
+                idx += 1
+            for r in range(m-layer-2, layer, -1):
+                grid[r][layer] = arr[idx]
+                idx += 1
         return grid
