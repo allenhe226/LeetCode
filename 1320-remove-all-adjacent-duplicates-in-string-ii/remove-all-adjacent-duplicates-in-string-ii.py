@@ -6,11 +6,11 @@ class Solution:
                 stack.append([c, 1])
             elif c == stack[-1][0]:
                 stack[-1][1] += 1
-            if stack[-1][1] == k:
-                stack.pop()
+                if stack[-1][1] == k:
+                    stack.pop()
         
-        print(stack)
-        res = ""
+        res = []
         for c, f in stack:
-            res += c * f
-        return res
+            for i in range(f):
+                res.append(c)
+        return "".join(res)
