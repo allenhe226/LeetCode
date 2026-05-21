@@ -7,10 +7,8 @@ class Solution:
                 num //= 10
         res = 0
         for num in arr2:
-            while num > 0:
-                if len(str(num)) <= res:
-                    break
-                if num in prefixes:
-                    res = len(str(num))
+            while num > 0 and num not in prefixes:
                 num //= 10
+            if num > 0:
+                   res = max(res, len(str(num)))
         return res
