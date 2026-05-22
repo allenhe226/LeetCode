@@ -2,7 +2,7 @@ class Solution:
     def peakIndexInMountainArray(self, arr: List[int]) -> int:
         n = len(arr)
         l, r = 0, n-1
-        while l < r:
+        while l <= r:
             m = (l+r)//2
             if m == 0:
                 l = m+1
@@ -11,7 +11,7 @@ class Solution:
             elif arr[m] > arr[m-1] and arr[m] > arr[m+1]:
                 return m
             elif arr[m] > arr[m-1]:
-                l = m
+                l = m+1
             elif arr[m] < arr[m-1]:
-                r = m
+                r = m-1
         
