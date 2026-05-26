@@ -1,15 +1,19 @@
 class Solution:
     def numberOfSpecialChars(self, word: str) -> int:
-        lower = [False] * 26
-        upper = [False] * 26
-        for i in range(len(word)):
-            if ord(word[i])-ord("a") >= 0:
-                lower[ord(word[i])-ord("a")] = True
-            else:
-                upper[ord(word[i])-ord("A")] = True
-            
         count = 0
-        for i in range(26):
-            if lower[i] and upper[i]:
-                count += 1
+        res = [0] * 26
+        lower, upper = set(), set()
+        for i in range(len(word)):
+            if ord(word[i]) >= ord("a") and word[i] not in lower:
+                lower.add(word[i])
+                val = ord(word[i])-ord("a")
+                res[val] += 1
+                if res[val] == 2:
+                    count += 1
+            elif ord(word[i]) <= ord("Z") and word[i] not in upper:
+                upper.add(word[i])
+                val = ord(word[i])-ord("A")
+                res[val] += 1
+                if res[val] == 2:
+                    count += 1
         return count
