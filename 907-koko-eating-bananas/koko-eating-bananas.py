@@ -1,6 +1,6 @@
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        l, r = 1, 1000000000
+        l, r = 1, int(1e9)
         def valid(x):
             hours = 0
             for pile in piles:
