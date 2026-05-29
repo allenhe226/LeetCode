@@ -1,7 +1,9 @@
 class Solution:
     def maxConsecutive(self, bottom: int, top: int, special: List[int]) -> int:
-        floors = [bottom-1] + sorted(special) + [top+1]
+        special.append(bottom-1)
+        special.append(top+1)
+        special.sort()
         maxfloors = 0
-        for i in range(len(floors)-1):
-            maxfloors = max(maxfloors, floors[i+1] - floors[i] - 1)
+        for i in range(len(special)-1):
+            maxfloors = max(maxfloors, special[i+1] - special[i] - 1)
         return maxfloors
