@@ -1,18 +1,12 @@
 class Solution:
     def pivotArray(self, nums: List[int], pivot: int) -> List[int]:
         n = len(nums)
-        ans = [0] * n
-        idx = 0
+        l1, l2, l3 = [], [], []
         for i in range(n):
             if nums[i] < pivot:
-                ans[idx] = nums[i]
-                idx += 1
-        for i in range(n):
-            if nums[i] == pivot:
-                ans[idx] = nums[i]
-                idx += 1
-        for i in range(n):
-            if nums[i] > pivot:
-                ans[idx] = nums[i]
-                idx += 1
-        return ans
+                l1.append(nums[i])
+            elif nums[i] == pivot:
+                l2.append(nums[i])
+            else:
+                l3.append(nums[i])
+        return l1 + l2 + l3
