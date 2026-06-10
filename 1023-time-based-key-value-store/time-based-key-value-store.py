@@ -11,7 +11,9 @@ class TimeMap:
         ans = -1
         while l <= r:
             m = l+(r-l)//2
-            if self.values[key][m][0] <= timestamp:
+            if self.values[key][m][0] == timestamp:
+                return self.values[key][m][1]
+            elif self.values[key][m][0] < timestamp:
                 ans = m
                 l = m+1
             else:
