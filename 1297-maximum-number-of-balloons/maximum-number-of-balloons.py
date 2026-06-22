@@ -1,16 +1,9 @@
 class Solution:
     def maxNumberOfBalloons(self, text: str) -> int:
-        b, a, l, o, n = 0, 0, 0, 0, 0
+        word = "balloon"
+        count = defaultdict(int)
         for char in text:
-            if char == "b":
-                b += 1
-            elif char == "a":
-                a += 1
-            elif char == "l":
-                l += 1
-            elif char == "o":
-                o += 1
-            elif char == "n":
-                n += 1
-        return min(b, a, n, l//2, o//2)
+            if char in word:
+                count[char] += 1
+        return min(count["b"], count["a"], count["n"], count["l"]//2, count["o"]//2)
         
