@@ -1,16 +1,18 @@
 class Solution:
     def countMajoritySubarrays(self, nums: List[int], target: int) -> int:
-        count = [0]
-        for num in nums:
-            if num == target:
-                count.append(count[-1] + 1)
-            else:
-                count.append(count[-1])
-
-        ans = 0
         n = len(nums)
+        pre = [0] * (n*2+1)
+        pre[n] = 1
+        cnt = n
+        ans = presum = 0
         for i in range(n):
-            for j in range(i,n):
-                if count[j+1]-count[i] > (j-i+1)//2:
-                    ans += 1
+            if nums[i] == target:
+                presum += pre[cnt]
+                cnt += 1
+                pre[cnt] += 1
+            else:
+                cnt -= 1
+                presum -= pre[cnt]
+                pre[cnt] += 1
+            ans += presum
         return ans
