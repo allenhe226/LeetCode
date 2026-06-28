@@ -9,20 +9,15 @@ class Solution:
         dist[source][power] = 0
         while q:
             t, p, node = heapq.heappop(q)
-            p = -p
-  
             if node == target:
-                return [t, p]
-
-            if p < cost[node]:
+                return [t, -p]
+            if -p < cost[node]:
                 continue
-            p -= cost[node]
-            
+            p += cost[node]
             for neighbor, time in adj[node]:
-                if t+time < dist[neighbor][p]:
-                    dist[neighbor][p] = t + time
-                    heapq.heappush(q, (t+time, -p, neighbor))
-                    
+                if t+time < dist[neighbor][-p]:
+                    dist[neighbor][-p] = t+time
+                    heapq.heappush(q, (t+time, p, neighbor))  
         return [-1,-1]
             
         
