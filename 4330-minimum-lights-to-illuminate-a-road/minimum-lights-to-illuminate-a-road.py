@@ -6,7 +6,6 @@ class Solution:
             if lights[i] > 0:
                 diff[max(0, i-lights[i])] += 1
                 diff[min(n, i+lights[i]+1)] -= 1
-        print(diff)
         count = cur = i = 0
         while i < n:
             cur += diff[i]
