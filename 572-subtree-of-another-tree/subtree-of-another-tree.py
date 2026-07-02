@@ -9,9 +9,7 @@ class Solution:
         def sameTree(root, subroot):
             if not root and not subroot:
                 return True
-            if not root or not subroot:
-                return False
-            if root.val != subroot.val:
+            if not root or not subroot or root.val != subroot.val:
                 return False
             return sameTree(root.left, subroot.left) and sameTree(root.right, subroot.right)
 
