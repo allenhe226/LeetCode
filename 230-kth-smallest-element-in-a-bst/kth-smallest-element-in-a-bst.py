@@ -13,9 +13,9 @@ class Solution:
                 return
             if not self.res:
                 dfs(node.left)
-            self.count += 1
-            if self.count == k:
-                self.res = node.val
+                self.count += 1
+                if self.count == k:
+                    self.res = node.val
             if not self.res:
                 dfs(node.right)
         dfs(root)
