@@ -7,16 +7,16 @@
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
         inorder_map = {value: i for i, value in enumerate(inorder)}
-        preorder_idx = 0
-        def build(left, right):
-            nonlocal preorder_idx
+        idx = 0
+        def dfs(left, right):
+            nonlocal idx
             if left > right:
                 return None
-            root_val = preorder[preorder_idx]
-            preorder_idx += 1
+            root_val = preorder[idx]
             root = TreeNode(root_val)
+            idx += 1
             mid = inorder_map[root_val]
-            root.left = build(left, mid-1)
-            root.right = build(mid+1, right)
+            root.left = dfs(left, mid-1)
+            root.right = dfs(mid+1, right)
             return root
-        return build(0, len(inorder)-1)
+        return dfs(0, len(inorder)-1)
