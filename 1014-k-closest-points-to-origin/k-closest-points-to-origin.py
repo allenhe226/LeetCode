@@ -6,6 +6,5 @@ class Solution:
         
         res = []
         for i in range(k):
-            x, y, _ = points[i]
-            res.append([x,y])
+            res.append([points[i][0], points[i][1]])
         return res
