@@ -1,27 +1,21 @@
-MOD = 10**9 + 7
-pow10 = [1] * 100001
-for i in range(1, 100001):
-    pow10[i] = pow10[i - 1] * 10 % MOD
-
-
 class Solution:
     def sumAndMultiply(self, s: str, queries: List[List[int]]) -> List[int]:
+        MOD = 10**9+7
+        pow10 = [1] * 100001
+        for i in range(1, 100001):
+            pow10[i] = pow10[i-1] * 10 % MOD
+
         n = len(s)
-        sum = [0] * (n + 1)
-        x = [0] * (n + 1)
-        cnt = [0] * (n + 1)
-        for i, c in enumerate(s):
-            d = int(c)
-            sum[i + 1] = sum[i] + d
-            x[i + 1] = (x[i] * 10 + d) % MOD if d > 0 else x[i]
-            cnt[i + 1] = cnt[i] + (d > 0)
+        psa = [0] * (n+1)
+        x = [0] * (n+1)
+        cnt = [0] * (n+1)
+        for i in range(n):
+            psa[i+1] = psa[i] + int(s[i])
+            x[i+1] = (x[i] * 10 + int(s[i])) % MOD if int(s[i]) > 0 else x[i]
+            cnt[i+1] = cnt[i] + (int(s[i]) > 0)
 
-        m = len(queries)
-        res = [0] * m
-        for i in range(m):
-            l = queries[i][0]
-            r = queries[i][1] + 1
-            length = cnt[r] - cnt[l]
-            res[i] = (x[r] - x[l] * pow10[length]) * (sum[r] - sum[l]) % MOD
-
+        res = []
+        for l, r in queries:
+            length = cnt[r+1] - cnt[l]
+            res.append((x[r+1] - x[l] * pow10[length]) * (psa[r+1] - psa[l]) % MOD)
         return res
