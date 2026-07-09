@@ -1,18 +1,18 @@
+MOD = 10**9+7
+pow10 = [1] * 100001
+for i in range(1, 100001):
+    pow10[i] = pow10[i-1] * 10 % MOD
 class Solution:
     def sumAndMultiply(self, s: str, queries: List[List[int]]) -> List[int]:
-        MOD = 10**9+7
-        pow10 = [1] * 100001
-        for i in range(1, 100001):
-            pow10[i] = pow10[i-1] * 10 % MOD
-
         n = len(s)
         psa = [0] * (n+1)
         x = [0] * (n+1)
         cnt = [0] * (n+1)
         for i in range(n):
-            psa[i+1] = psa[i] + int(s[i])
-            x[i+1] = (x[i] * 10 + int(s[i])) % MOD if int(s[i]) > 0 else x[i]
-            cnt[i+1] = cnt[i] + (int(s[i]) > 0)
+            c = int(s[i])
+            psa[i+1] = psa[i] + c
+            x[i+1] = (x[i] * 10 + c) % MOD if c > 0 else x[i]
+            cnt[i+1] = cnt[i] + (c > 0)
 
         res = []
         for l, r in queries:
