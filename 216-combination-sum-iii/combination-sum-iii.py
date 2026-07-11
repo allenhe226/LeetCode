@@ -1,6 +1,5 @@
 class Solution:
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
-        L = 9
         res = []
         cur = []
         def dfs(i, target):
@@ -10,10 +9,10 @@ class Solution:
             if len(cur) > k or target < 0:
                 return
             
-            for idx in range(i, L+1):
+            for idx in range(i+1, 10):
                 cur.append(idx)
-                dfs(idx+1, target - idx)
+                dfs(idx, target - idx)
                 cur.pop()
-        dfs(1, n)
+        dfs(0, n)
         return res
 
