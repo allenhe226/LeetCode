@@ -1,6 +1,5 @@
 import heapq
 class Twitter:
-
     def __init__(self):
         self.tweetMap = defaultdict(list)
         self.followMap = defaultdict(set)
