@@ -3,17 +3,16 @@ class Solution:
         res = []
         cur = []
         n = len(candidates)
-        def dfs(i, total):
+        def dfs(idx, total):
             if total == target:
                 res.append(cur.copy())
                 return
-            if i >= n or total > target:
+            if total > target:
                 return
             
-            cur.append(candidates[i])
-            dfs(i, total + candidates[i])
-                
-            cur.pop()
-            dfs(i+1, total)
+            for i in range(idx, n):
+                cur.append(candidates[i])
+                dfs(i, total + candidates[i])
+                cur.pop()
         dfs(0, 0)
         return res
