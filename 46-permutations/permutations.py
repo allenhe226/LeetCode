@@ -1,22 +1,16 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         res = []
-        cur = []
-
-        n = len(nums)
-        vis = [False] * n
-        def dfs():
-            found = False
-            for i in range(n):
-                if not vis[i]:
-                    found = True
-                    vis[i] = True
-                    cur.append(nums[i])
-                    dfs()
-                    vis[i] = False
-                    cur.pop()
-            if not found:
-                res.append(cur.copy())
-        dfs()
+        subset = []
+        def backtrack():
+            if len(subset) == len(nums):
+                res.append(subset[:])
+                return
+            for n in nums:
+                if n in subset:
+                    continue
+                subset.append(n)
+                backtrack()
+                subset.pop()
+        backtrack()
         return res
-        
