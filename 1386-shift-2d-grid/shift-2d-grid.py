@@ -1,15 +1,14 @@
 class Solution:
     def shiftGrid(self, grid: List[List[int]], k: int) -> List[List[int]]:
-        def shift():
-            m, n = len(grid), len(grid[0])
-            first = grid[-1][-1]
-            for i in range(m-1,-1,-1):
-                grid[i][-1] = grid[(i-1) % m][-1]
-            grid[0][-1] = first
-            for i in range(m):
-                grid[i] = grid[i][-1:] + grid[i][:-1]
-        
-        for i in range(k):
-            shift()
-        return grid
+        m, n = len(grid), len(grid[0])
+        nums = []
+        for i in range(m):
+            for j in range(n):
+                nums.append(grid[i][j])
+        k = k % (m * n)
+        nums = nums[-k:] + nums[:-k]
+        res = []
+        for i in range(0, m*n, n):
+            res.append(nums[i:i+n])
+        return res
                 
